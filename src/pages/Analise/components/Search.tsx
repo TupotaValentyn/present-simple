@@ -1,4 +1,4 @@
-import { Box, Button, CircularProgress, Grid, makeStyles, TextField, Theme, Typography } from '@material-ui/core';
+import { Box, Button, CircularProgress, makeStyles, TextField, Theme, Typography } from '@material-ui/core';
 import Travel from 'components/icons/Travel';
 import React, { FC } from 'react';
 import { useController, useForm } from 'react-hook-form';
@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useCommonStyles } from 'common/styles';
 import Alert from '@material-ui/lab/Alert';
+import AnaliseData from 'pages/Analise/components/AnaliseData';
 
 const useStyles = makeStyles((theme: Theme) => ({
   travelIcon: {
@@ -66,7 +67,7 @@ type Props = {
   of: number;
 }
 
-const CircleProgress: FC<Props> = ({ progress, mainValue, of }) => {
+const CircleProgress: FC<Props> = ({ mainValue, of }) => {
   const classes = useStyles()
 
   return <Box className={classes.circlesWrapper}>
@@ -108,8 +109,8 @@ const AnaliseSearch = () => {
 
 
   const onSubmit = (formState: { search: string }) => {
-    console.log(form.getValues())
-  }
+    console.log(formState);
+  };
 
   return <Box display="flex" flexDirection="column" alignItems="center">
     <Box display="flex" justifyContent="center" mb={4}>
@@ -133,7 +134,7 @@ const AnaliseSearch = () => {
       </Box>
 
       <Box>
-        <Box display="flex">
+        <Box display="flex" mb={6}>
           <Box mr={2}>
             <CircleProgress progress={70} mainValue={0} of={5} />
           </Box>
@@ -170,7 +171,7 @@ const AnaliseSearch = () => {
           </Box>
         </Box>
         <Box>
-
+          <AnaliseData />
         </Box>
       </Box>
     </Box>
