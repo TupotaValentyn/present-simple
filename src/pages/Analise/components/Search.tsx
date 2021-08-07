@@ -26,7 +26,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
   },
   circlesWrapper: {
-    position: 'relative'
+    position: 'relative',
+    width: 88
   },
   inner: {
     width: 72,
@@ -131,19 +132,47 @@ const AnaliseSearch = () => {
         </form>
       </Box>
 
-      <Grid container>
-        <Grid item>
+      <Box>
+        <Box display="flex">
           <Box mr={2}>
             <CircleProgress progress={70} mainValue={0} of={5} />
           </Box>
-        </Grid>
-        <Grid>
-          <Alert severity="success" style={{ width: '100%' }}>This is a success alert — check it out!</Alert>
-          <Box>
+          <Box width="100%" display="flex" flexDirection="column">
+            <Box mb={1}>
+              <Alert severity="success" style={{ width: '100%' }}>This is a success alert — check it out!</Alert>
+            </Box>
+            <Box display="flex" mb={4}>
+              <Box pr={2} pl={2}
+                   style={{
+                     borderRight: '1px solid #EBEBEB',
+                     height: 38,
+                     borderLeft: '1px solid #EBEBEB',
+                     flexGrow: 1
+                   }}>
+                <Typography style={{ fontSize: 14 }}>
+                  https://www.behance.net/
+                </Typography>
+                <Typography variant="caption" color="secondary">
+                  URL address
+                </Typography>
+              </Box>
 
+              <Box pr={2} pl={2}
+                   style={{ borderRight: '1px solid #EBEBEB', height: 38, flexGrow: 1 }}>
+                <Typography style={{ fontSize: 14 }}>
+                  https://www.behance.net/
+                </Typography>
+                <Typography variant="caption" color="secondary">
+                  URL address
+                </Typography>
+              </Box>
+            </Box>
           </Box>
-        </Grid>
-      </Grid>
+        </Box>
+        <Box>
+
+        </Box>
+      </Box>
     </Box>
   </Box>
 };

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { AppBar, Box, makeStyles, Tab, Tabs, Theme, Typography } from '@material-ui/core';
 import { PageLayout } from 'components';
-import AnaliseSearch  from 'pages/Analise/components/Search';
+import AnaliseSearch from 'pages/Analise/components/Search';
 
 type Props = {}
 
@@ -21,6 +21,7 @@ function a11yProps(index: any) {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
+    boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.1)',
     backgroundColor: theme.palette.background.paper,
     '& > [role="tabpanel"]': {
       '& > div': {
@@ -31,7 +32,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   appbar: {
     width: 'fit-content',
     position: 'relative',
-    top: -48
+    top: -48,
+    boxShadow: 'none'
   },
   travelIcon: {
     width: 80,
@@ -41,8 +43,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: 0
   },
   tabPanel: {
-    '& > div': {
-      padding: 0,
+    background: 'white',
+    '& > .MuiTab-wrapper': {
+      color: theme.palette.primary.main
     }
   }
 }));
@@ -81,9 +84,9 @@ const Analise: FC<Props> = () => {
         <AppBar position="static" className={classes.appbar}>
           <Tabs value={value} onChange={handleChange} aria-label="simple tabs example" indicatorColor="primary"
                 classes={{ flexContainer: classes.noPadding }}>
-            <Tab label="SEARCH" {...a11yProps(0)} />
-            <Tab label="FILE" {...a11yProps(1)} />
-            <Tab label="URL" {...a11yProps(2)} />
+            <Tab label="SEARCH" {...a11yProps(0)} className={classes.tabPanel} />
+            <Tab label="FILE" {...a11yProps(1)} className={classes.tabPanel} />
+            <Tab label="URL" {...a11yProps(2)} className={classes.tabPanel} />
           </Tabs>
         </AppBar>
         <TabPanel value={value} index={0}>
