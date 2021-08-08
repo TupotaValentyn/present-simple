@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import { PageLayout } from 'components';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import { Card, CardContent, makeStyles, CardHeader, Box, Grid } from '@material-ui/core';
+import { Box, Card, CardContent, CardHeader, Grid, makeStyles, Typography } from '@material-ui/core';
 import Chart from 'react-apexcharts'
+import mainImage from 'main.png';
 
 type Props = {}
 
@@ -11,6 +12,25 @@ const useClasses = makeStyles(() => {
     icon: {
       width: 30,
       height: 30
+    },
+    marginRight: {
+      marginRight: 16,
+    },
+    marginBottom: {
+      marginRight: 16,
+    },
+    mainCard: {
+      padding: 40,
+      height: 192,
+      overflow: 'visible'
+    },
+    mainImageWrapper: {
+      width: 300,
+      position: 'relative',
+      '& > img': {
+        position: 'absolute',
+        top: -100
+      }
     }
   }
 });
@@ -64,10 +84,6 @@ const Dashboard: FC<Props> = () => {
             columnWidth: 30,
             dataLabels: {
               position: 'top',
-
-              formatter: function (val: any, opts: any) {
-                return val + 'sex'
-              },
             },
           }
         },
@@ -98,30 +114,54 @@ const Dashboard: FC<Props> = () => {
           }
         }
       },
-
-
     };
 
     return <PageLayout title="Dashboard" icon={<DashboardIcon className={classes.icon} />}>
-      <Grid container component={Card}>
-        <Grid item>
-          sdfsdf
+      <Box mb={2}>
+        <Grid container>
+          <Grid item md={12}>
+            <Card className={classes.mainCard}>
+              <Box display="flex" justifyContent="space-between">
+                <Box>
+                  <Typography variant="h3">
+                    Hello, Ann!
+                  </Typography>
+                  <Box>
+                    <Typography>
+                      Collaborate for a safer Internet
+                    </Typography>
+                    <Typography>
+                      Let's make the Internet safe for everyone by joint efforts!
+                    </Typography>
+                  </Box>
+                </Box>
+                <Box className={classes.mainImageWrapper}>
+                  <img src={mainImage} alt="maine image" />
+                </Box>
+              </Box>
+            </Card>
+          </Grid>
         </Grid>
-      </Grid>
-
-      <Grid container>
-        <Grid component={Card} md={8}>
-          <CardHeader>Statistics</CardHeader>
-          <Chart options={state.options as any} series={state.series} type="bar" height={320} width="100%" />
+      </Box>
+      <Grid container spacing={2}>
+        <Grid item md={8}>
+          <Card>
+            <Box mr={2}>
+              <CardHeader>Statistics</CardHeader>
+              <Chart options={state.options as any} series={state.series} type="bar" height={320} width="100%" />
+            </Box>
+          </Card>
         </Grid>
-        <Grid item component={Card}>
-          <CardHeader>Statistics</CardHeader>
-          <CardContent>
-            <Chart options={{ ...donutOptions }} type="donut"
-                   series={[24, 38, 30, 8]}
-                   width={500} height={320}
-            />
-          </CardContent>
+        <Grid item md={4}>
+          <Card>
+            <CardHeader>Statistics</CardHeader>
+            <CardContent>
+              <Chart options={{ ...donutOptions }} type="donut"
+                     series={[24, 38, 30, 8]}
+                     width={360} height={292}
+              />
+            </CardContent>
+          </Card>
         </Grid>
       </Grid>
     </PageLayout>;
