@@ -25,7 +25,7 @@ const AppBar: FC<Props> = () => {
   const renderLink = (props: { route: ROUTES, label: string }) => {
     return <ListItem key={props.route}>
       <NavLink to={props.route} className={classes.noDecoration}>
-        <Typography color="textSecondary">
+        <Typography color="textPrimary" style={{ fontWeight: 500 }}>
           {props.label}
         </Typography>
       </NavLink>
@@ -35,7 +35,12 @@ const AppBar: FC<Props> = () => {
   return <MUIAppBar position="sticky" className={classes.appBar}>
     <Toolbar className={classes.toolbar}>
       <Box className={classes.logo}>
-        <img src={logo} alt="LOGO" />
+        <NavLink to={ROUTES.DASHBOARD} style={{ textDecoration: 'none' }}>
+          <Typography variant="h5" color="primary" style={{ fontWeight: 500 }}>
+            DEFEND PHISH
+          </Typography>
+        </NavLink>
+        {/*<img src={logo} alt="LOGO" />*/}
       </Box>
       <Box display="flex" justifyContent="flex-end" flexGrow={1} alignItems="center" mr={3}>
         <Box mr={3}>
@@ -43,22 +48,19 @@ const AppBar: FC<Props> = () => {
             {headerRoutes.map(renderLink)}
           </List>
         </Box>
-        <Box>
-          <ThemeToggler />
-        </Box>
+        {/*<Box>*/}
+        {/*  <ThemeToggler />*/}
+        {/*</Box>*/}
       </Box>
 
-      <Box display="flex">
-        <Box display="flex" flexDirection="column" mr={2}>
-          <Typography variant="subtitle1" color="textSecondary">
-            John Doe
-          </Typography>
-
-          <Typography variant="caption" color="textSecondary">
-            Available
-          </Typography>
+      <Box display="flex" alignItems="center">
+        <Box mr={1}>
+          <Avatar
+            src="https://i.picsum.photos/id/1011/5472/3648.jpg?hmac=Koo9845x2akkVzVFX3xxAc9BCkeGYA9VRVfLE4f0Zzk" />
         </Box>
-        <Avatar src="https://i.picsum.photos/id/1011/5472/3648.jpg?hmac=Koo9845x2akkVzVFX3xxAc9BCkeGYA9VRVfLE4f0Zzk" />
+        <Typography variant="subtitle1" color="textPrimary">
+          Ann Warren
+        </Typography>
       </Box>
     </Toolbar>
   </MUIAppBar>

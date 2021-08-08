@@ -1,12 +1,13 @@
 import { Box, Button, CircularProgress, makeStyles, TextField, Theme, Typography } from '@material-ui/core';
 import Travel from 'components/icons/Travel';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { useController, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useCommonStyles } from 'common/styles';
 import Alert from '@material-ui/lab/Alert';
 import AnaliseData from 'pages/Analise/components/AnaliseData';
+import { links, STATUSES } from 'pages/Analise/components/mock';
 
 const useStyles = makeStyles((theme: Theme) => ({
   travelIcon: {
@@ -18,6 +19,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   progress: {
     color: '#E4F6EF',
+  },
+  errorColor: {
+    color: '#FDECEA'
   },
   progressSize: {
     width: '88px !important',
@@ -48,6 +52,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 600,
     color: '#3EA279',
     fontSize: 18
+  }, mainErrorValue: {
+    fontWeight: 600,
+    color: '#F55448',
+    fontSize: 18
   },
   diameter: {
     width: 100
@@ -65,25 +73,32 @@ type Props = {
   progress: number;
   mainValue: number;
   of: number;
+  data: any[];
 }
 
-const CircleProgress: FC<Props> = ({ mainValue, of }) => {
-  const classes = useStyles()
+const CircleProgress: FC<Props> = ({ mainValue, of, data }) => {
+  const classes = useStyles();
+  const status = data?.[0]?.status;
+
+  const hasError = status === STATUSES.DANGEROUS;
 
   return <Box className={classes.circlesWrapper}>
     <CircularProgress variant="determinate" value={100}
-                      classes={{ circle: classes.progress, root: classes.progressSize }}
+                      classes={{
+                        circle: hasError ? classes.errorColor : classes.progress,
+                        root: classes.progressSize
+                      }}
     />
 
     <Box className={classes.inner}>
       <Box>
         <Box display="flex" justifyContent="center" mb={1}>
-          <Typography className={classes.mainValue}>
-            {mainValue}
+          <Typography className={hasError ? classes.mainErrorValue : classes.mainValue}>
+            {hasError ? 20 : mainValue}
           </Typography>
         </Box>
         <Typography>
-          {`${mainValue}/${of}`}
+          {hasError ? `${of}/${of}` : `${mainValue}/${of}`}
         </Typography>
       </Box>
     </Box>
@@ -96,7 +111,9 @@ const AnaliseSearch = () => {
   const form = useForm({
     defaultValues,
     resolver: yupResolver(validationSchema)
-  })
+  });
+
+  const [data, setData] = useState<any>([]);
 
   const {
     field: { ref, ...inputProps },
@@ -107,10 +124,14 @@ const AnaliseSearch = () => {
     defaultValue: '',
   });
 
-
   const onSubmit = (formState: { search: string }) => {
-    console.log(formState);
+    const result = links.find((item) => item.url.includes(formState.search));
+    setData(result ? [result] : []);
   };
+
+  const url = data?.[0]?.url;
+  const status = data?.[0]?.status;
+  const hasError = status === STATUSES.DANGEROUS;
 
   return <Box display="flex" flexDirection="column" alignItems="center">
     <Box display="flex" justifyContent="center" mb={4}>
@@ -133,14 +154,15 @@ const AnaliseSearch = () => {
         </form>
       </Box>
 
-      <Box>
+      {data?.length ? <Box>
         <Box display="flex" mb={6}>
           <Box mr={2}>
-            <CircleProgress progress={70} mainValue={0} of={5} />
+            <CircleProgress progress={70} mainValue={0} of={5} data={data} />
           </Box>
           <Box width="100%" display="flex" flexDirection="column">
             <Box mb={1}>
-              <Alert severity="success" style={{ width: '100%' }}>This is a success alert — check it out!</Alert>
+              <Alert severity={hasError ? 'error' : 'success'}
+                     style={{ width: '100%' }}>{hasError ? 'Dangerous resource' : 'Reliable site'}</Alert>
             </Box>
             <Box display="flex" mb={4}>
               <Box pr={2} pl={2}
@@ -151,7 +173,7 @@ const AnaliseSearch = () => {
                      flexGrow: 1
                    }}>
                 <Typography style={{ fontSize: 14 }}>
-                  https://www.behance.net/
+                  {url}
                 </Typography>
                 <Typography variant="caption" color="secondary">
                   URL address
@@ -161,19 +183,21 @@ const AnaliseSearch = () => {
               <Box pr={2} pl={2}
                    style={{ borderRight: '1px solid #EBEBEB', height: 38, flexGrow: 1 }}>
                 <Typography style={{ fontSize: 14 }}>
-                  https://www.behance.net/
+                  text/html; charset=UTF-8/
                 </Typography>
                 <Typography variant="caption" color="secondary">
-                  URL address
+                  Content type
                 </Typography>
               </Box>
             </Box>
           </Box>
         </Box>
         <Box>
-          <AnaliseData />
+          <AnaliseData data={data} />
         </Box>
-      </Box>
+      </Box> : <Box>
+
+      </Box>}
     </Box>
   </Box>
 };

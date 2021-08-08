@@ -9,6 +9,7 @@ export const useClasses = makeStyles((theme: Theme) => {
     },
     toolbar: {
       display: 'flex',
+      padding: '0 144px'
     },
     logo: {
       marginRight: 16,

@@ -146,21 +146,21 @@ const Dashboard: FC<Props> = () => {
       <Grid container spacing={2}>
         <Grid item md={8}>
           <Card>
-            <Box mr={2}>
-              <CardHeader>Statistics</CardHeader>
+            <Box mr={2} p={5}>
+              <Typography variant="h6" style={{ fontWeight: 500 }}>Statistics</Typography>
               <Chart options={state.options as any} series={state.series} type="bar" height={320} width="100%" />
             </Box>
           </Card>
         </Grid>
         <Grid item md={4}>
-          <Card>
-            <CardHeader>Statistics</CardHeader>
-            <CardContent>
+          <Card style={{ height: '100%' }}>
+            <Box p={5}>
+              <Typography variant="h6" style={{ fontWeight: 500 }}>Statistics</Typography>
               <Chart options={{ ...donutOptions }} type="donut"
                      series={[24, 38, 30, 8]}
                      width={360} height={292}
               />
-            </CardContent>
+            </Box>
           </Card>
         </Grid>
       </Grid>

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Box } from '@material-ui/core';
-import { PageLayout, Tabs } from 'components';
+import { PageLayout, Tabs, ComingSoon } from 'components';
 import AnaliseSearch from 'pages/Analise/components/Search';
 import { useStyles } from './utils/styles';
 import { useTabs } from 'utils/useTabs';
@@ -33,8 +33,12 @@ const Analise: FC<Props> = () => {
         <TabPanel value={tabsProps.tabState} index={0}>
           <AnaliseSearch />
         </TabPanel>
-        <TabPanel value={tabsProps.tabState} index={1}>FILE</TabPanel>
-        <TabPanel value={tabsProps.tabState} index={2}>URL</TabPanel>
+        <TabPanel value={tabsProps.tabState} index={1}>
+          <ComingSoon />
+        </TabPanel>
+        <TabPanel value={tabsProps.tabState} index={2}>
+          <ComingSoon />
+        </TabPanel>
       </div>
     </Box>
   </PageLayout>
