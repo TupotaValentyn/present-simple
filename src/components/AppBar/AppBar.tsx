@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { useClasses } from 'components/AppBar/styles';
 import ThemeToggler from 'components/ThemeToggler';
 import { ROUTES } from 'config/routes/routes';
+import logo from 'log-PS.png';
 
 type Props = {};
 
@@ -14,13 +15,12 @@ const AppBar: FC<Props> = () => {
     label: 'Dashboard',
     route: ROUTES.DASHBOARD
   }, {
-    label: 'Analise',
+    label: 'Analyze',
     route: ROUTES.ANALISE
   }, {
     label: 'Blog',
     route: ROUTES.BLOG
   }];
-
 
   const renderLink = (props: { route: ROUTES, label: string }) => {
     return <ListItem key={props.route}>
@@ -32,10 +32,10 @@ const AppBar: FC<Props> = () => {
     </ListItem>
   };
 
-  return <MUIAppBar position="sticky">
+  return <MUIAppBar position="sticky" className={classes.appBar}>
     <Toolbar className={classes.toolbar}>
       <Box className={classes.logo}>
-        LOGO
+        <img src={logo} alt="LOGO" />
       </Box>
       <Box display="flex" justifyContent="flex-end" flexGrow={1} alignItems="center" mr={3}>
         <Box mr={3}>

@@ -26,7 +26,7 @@ const Analise: FC<Props> = () => {
 
   const classes = useStyles();
 
-  return <PageLayout title="Analise" icon={<Check />}>
+  return <PageLayout title="Analyze" icon={<Check />}>
     <Box pr={23} pl={23} pt={8}>
       <div className={classes.root}>
         <Tabs {...tabsProps} />

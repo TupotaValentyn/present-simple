@@ -1,7 +1,12 @@
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 
-export const useClasses = makeStyles(() => {
+export const useClasses = makeStyles((theme: Theme) => {
   return {
+    appBar: {
+      zIndex: 999,
+      background: theme.palette.common.white,
+      boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.12)'
+    },
     toolbar: {
       display: 'flex',
     },
