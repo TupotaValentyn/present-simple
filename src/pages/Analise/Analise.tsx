@@ -17,7 +17,7 @@ const tabs = [{
   label: 'FILE'
 }, {
   value: 2,
-  label: 'URL'
+  label: 'FILE URL'
 }];
 
 const Analise: FC<Props> = () => {

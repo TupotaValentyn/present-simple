@@ -3,9 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { AppBar as MUIAppBar, Avatar, Box, List, ListItem, Typography } from '@material-ui/core';
 import Toolbar from '@material-ui/core/Toolbar';
 import { useClasses } from 'components/AppBar/styles';
-import ThemeToggler from 'components/ThemeToggler';
 import { ROUTES } from 'config/routes/routes';
-import logo from 'log-PS.png';
 
 type Props = {};
 
